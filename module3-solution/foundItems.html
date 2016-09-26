@@ -1,0 +1,8 @@
+<div class="col-md-12">
+  <ul>
+    <li ng-repeat="item in ctrl.found">
+      {{ item.name }}; {{ item.short_name}}; {{ item.description }}
+      <button ng-click="ctrl.onRemove({index: $index});">Don't want this one</button>
+    </li>
+  </ul>
+</div>
