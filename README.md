@@ -1,2 +1,0 @@
-# coursera-angularjs
-angularjs course 
