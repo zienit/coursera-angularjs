@@ -54,7 +54,7 @@
           var items = response.data.menu_items;
           var found = [];
           for (var i = 0; i < items.length; i++) {
-            if (items[i].description.toLowerCase().indexOf(searchTerm) !== -1) {
+            if (items[i].description.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
               found.push(items[i]);
             }
           }
