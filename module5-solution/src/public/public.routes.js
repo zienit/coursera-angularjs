@@ -52,15 +52,26 @@ function routeConfig ($stateProvider) {
       url: '/signup',
       templateUrl: 'src/public/signup/signup.html',
       controller: 'SignUpController',
-      controllerAs: 'reg'
+      controllerAs: 'reg',
+      resolve: {
+        user: ['SignUpService',function (SignUpService) {
+          return SignUpService.getMyInfo();
+        }]
+      }
     })
     .state('public.myinfo', {
       url: '/myinfo',
-      templateUrl: 'src/public/myinfo/myinfo.html'/*,
-      controller: 'SignUpController',
-      controllerAs: 'reg'*/
-    })
-    ;
+      templateUrl: 'src/public/myinfo/myinfo.html',
+      controller: ['user',function (user) {
+        this.user = user;
+      }],
+      controllerAs: 'info',
+      resolve: {
+        user: ['SignUpService',function (SignUpService) {
+          return SignUpService.getMyInfo();
+        }]
+      }
+    });
 }
 
 })();

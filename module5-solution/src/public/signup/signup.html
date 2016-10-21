@@ -69,12 +69,17 @@
       <div class="col-sm-10">
         <input type="text" name="favorite" placeholder="menu number"
           ng-model="reg.user.favorite"
+          ng-change="reg.changeFavorite()"
           required
           class="form-control"
         >
         <span class="help-block"
           ng-if="regForm.favorite.$error.required && regForm.favorite.$touched">
           Favorite is required
+        </span>
+        <span class="help-block"
+          ng-if="regForm.favorite.$error.code && regForm.favorite.$touched">
+          No such menu number exists
         </span>
       </div>
     </div>
