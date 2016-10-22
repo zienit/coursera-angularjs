@@ -62,8 +62,9 @@ function routeConfig ($stateProvider) {
     .state('public.myinfo', {
       url: '/myinfo',
       templateUrl: 'src/public/myinfo/myinfo.html',
-      controller: ['user',function (user) {
+      controller: ['user','ApiPath',function (user,ApiPath) {
         this.user = user;
+        this.basePath = ApiPath;
       }],
       controllerAs: 'info',
       resolve: {

@@ -10,17 +10,15 @@ function SignUpController($state,$scope,MenuService,SignUpService,user) {
   var $ctrl = this;
 
   $ctrl.user = user;
-  
+  $ctrl.saved = false;
+
   $ctrl.submit = function () {
-    console.log($ctrl.user.favorite);
     MenuService.getMenuItem($ctrl.user.favorite)
       .then(function(data) {
-        console.log("data",data);
+        $ctrl.user.data = data;
         SignUpService.setMyInfo($ctrl.user);
-//        $scope.regForm.favorite.$setValidity("code",true);
-        $state.go('public.myinfo');
+        $ctrl.saved = true;
       }).catch(function(y) {
-        console.log("error",y);
         $scope.regForm.favorite.$setValidity("code",false);
       })
   };

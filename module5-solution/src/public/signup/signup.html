@@ -78,7 +78,7 @@
           Favorite is required
         </span>
         <span class="help-block"
-          ng-if="regForm.favorite.$error.code && regForm.favorite.$touched">
+          ng-if="regForm.favorite.$error.code">
           No such menu number exists
         </span>
       </div>
@@ -93,6 +93,7 @@
         >Submit</button>
       </div>
     </div>
-
   </form>
+  <p ng-if="reg.saved" class="text-center">Your information has been saved</p>
+
 </div>

@@ -1,9 +1,35 @@
 <div class="container">
   <h2 class="text-center">My Info</h2>
-  Not Signed Up Yet. <a>Sign up Now!</a>
-  <div class="row">
-    <div class="col-xs-2">First Name</div>
-    <div class="col-xs-10">{{info.user.firstname}}</div>
+  <div ng-if="info.user === undefined">
+    Not Signed Up Yet. <a ui-sref="public.signup">Sign up Now!</a>
+  </div>
+  <div ng-if="info.user !== undefined">
+    <div ng-show="info.user" class="row">
+      <div class="col-xs-2">First Name</div>
+      <div class="col-xs-10">{{info.user.firstname}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2">Last Name</div>
+      <div class="col-xs-10">{{info.user.lastname}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2">Email</div>
+      <div class="col-xs-10">{{info.user.email}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2">Phone</div>
+      <div class="col-xs-10">{{info.user.phone}}</div>
+    </div>
+    <div class="row">
+      <div class="col-xs-5">
+          <img class="img-responsive" width="250" height="150" ng-src="{{info.basePath}}/images/{{info.user.data.short_name}}.jpg" alt="{{$ctrl.menuItem.name}}">
+      </div>
+      <div class="col-xs-7">
+        <h3>{{info.user.data.name}}</h3>
+        <p>{{info.user.data.description}}</p>
+      </div>
+    </div>
+
   </div>
 
 </div>

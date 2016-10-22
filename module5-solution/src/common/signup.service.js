@@ -8,14 +8,11 @@ function SignUpService() {
   var service = this;
 
   service.setMyInfo = function (user) {
-    console.log("setMyInfo",user);
     service.user = user;
   };
 
   service.getMyInfo = function() {
     return service.user;
   }
-
 }
-
 })();
