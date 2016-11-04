@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app='BeherenAccountsApp'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Beheren Accounts App</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  </head>
+
+  <body>
+    <h1>Beheren Accounts App</h1>
+
+    <a ui-sref="private.gebruikers">gebruikers</a>
+    <a ui-sref="private.groepen">groepen</a>
+
+    <ui-view></ui-view>
+
+    <!-- Libraries -->
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+    <script src="lib/angular-cookies.min.js"></script>
+    <script src="lib/sjcl.min.js"></script>
+    <script src="src/mylib.js"></script>
+
+    <!-- Modules -->
+    <script src="src/module.js"></script>
+    <script src="src/routes.js"></script>
+    <script src="src/login.controller.js"></script>
+    <script src="src/gebruikers.controller.js"></script>
+    <script src="src/groepen.controller.js"></script>
+    <script src="src/gebruikersBijGroep.controller.js"></script>
+    <script src="src/gebruiker.service.js"></script>
+    <script src="src/groep.service.js"></script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<h2>gebruikers bij groep</h2>
+<div class="container">
+  <table class="table">
+    <tr ng-repeat="item in ctrl.gebruikers">
+      <td>{{ item.pki }}</td><td>{{ item.achternaam }}</td><td>{{ item.voornaam }}</td>
+      <!-- <button ng-click="ctrl.onRemove({index: $index});">Don't want this one</button> -->
+    </tr>
+  </table>
+</div>
