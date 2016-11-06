@@ -17,7 +17,6 @@ angular.module('BeherenAccountsApp')
       var whoami = GebruikerService.whoami();
       if (!whoami && toState.name.startsWith("private.")) {
         var sso = $cookies.get("nl.klaverblad.sso");
-        console.log(sso);
         event.preventDefault();
         if (sso) {
           var login = GebruikerService.sso(sso);
@@ -74,14 +73,15 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     .state('logout',{
       url: '/logout',
       template: "<h2>uitgelogd...</h2>",
-      controller: ['GebruikerService',function(GebruikerService) {
+      controller: ['GebruikerService','$rootScope',function(GebruikerService,$rootScope) {
         GebruikerService.logout();
+        $rootScope.$broadcast("login",null);
       }]
     })
 
     .state('private',{
-      //abstract: true,
-      template: '<h2>hello</h2><a ui-sref="logout">logout</a><ui-view/>',
+      abstract: true,
+      template: '<ui-view/>',
     })
 
     .state('private.gebruikers', {

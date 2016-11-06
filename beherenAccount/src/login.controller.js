@@ -4,8 +4,8 @@
 angular.module('BeherenAccountsApp')
 .controller('LoginController', LoginController);
 
-LoginController.$inject = ['GebruikerService','$state','$stateParams','$cookies'];
-function LoginController(GebruikerService,$state,$stateParams,$cookies) {
+LoginController.$inject = ['GebruikerService','$state','$stateParams','$cookies','$rootScope'];
+function LoginController(GebruikerService,$state,$stateParams,$cookies,$rootScope) {
 
   var $ctrl = this;
 
@@ -16,27 +16,36 @@ function LoginController(GebruikerService,$state,$stateParams,$cookies) {
 
     GebruikerService.getGebruikerBijGebruikersnaam($ctrl.gebruikersnaam).then(function(g) {
       if (g.length === 1) {
-        authenticeren(g[0]);
+        return g[0];
       } else {
-        $ctrl.melding = "Onjuiste gebruikersnaam of wachtwoord";
+        throw { message : "Onjuiste gebruikersnaam of wachtwoord" };
       }
-    }).catch(function(e) {
-      $ctrl.melding = e.message;
+    })
+    .then(function(g) {
+      return authenticeren(g);
+    })
+    .then(function(l) {
+      $rootScope.$broadcast("login",l);
+      $state.go($stateParams.savedState === null ? "home" : $stateParams.savedState.name,$stateParams.savedParams)
+      .then(function(s) {
+        $rootScope.$broadcast("success",{ message : l.melding });
+      });
+    })
+    .catch(function(e) {
+      $rootScope.$broadcast("error",e);
     });
 
     function authenticeren(gebruiker)
     {
       var hash = hash64(gebruiker.salt,$ctrl.wachtwoord);
       var login = GebruikerService.authenticeren($ctrl.gebruikersnaam,hash);
-      login.then(function(l) {
+      return login.then(function(l) {
         if (l.status === "OK") {
           $cookies.put("nl.klaverblad.sso",l.token);
-          $state.go($stateParams.savedState === null ? "home" : $stateParams.savedState.name,$stateParams.savedParams);
+          return l;
         } else {
-          $ctrl.melding = l.melding;
+          throw { message : l.melding };
         }
-      }).catch(function(e) {
-        $ctrl.melding = e.message;
       });
     }
   }

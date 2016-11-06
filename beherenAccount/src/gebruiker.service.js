@@ -52,7 +52,7 @@ function GebruikerService($http,$cookies) {
         }
       }).then(function(p) {
         login = p.data;
-        return p.data;
+        return login;
       }).catch(function(e) {
         login = null;
         throw mylib.toMessage(e);
@@ -70,11 +70,9 @@ function GebruikerService($http,$cookies) {
           "token":token
         }
       }).then(function(p) {
-        console.log("sso success",token);
         login = p.data;
         return p.data;
       }).catch(function(e) {
-        console.log("sso failure",token);
         login = null;
         throw mylib.toMessage(e);
       });
