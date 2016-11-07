@@ -59,6 +59,34 @@ function GebruikerService($http,$cookies) {
       });
   };
 
+  service.salt = function() {
+    return $http({
+        method: "POST",
+        url: ("account/salt"),
+      }).then(function(p) {
+        return p.data;
+      }).catch(function(e) {
+        throw mylib.toMessage(e);
+      });
+  }
+
+  service.toevoegen = function(gebruiker) {
+    return $http({
+        method: "POST",
+        url: ("http://localhost:3000/account/gebruikers"),
+        headers: {
+          "Content-type":"application/json",
+          "Authorization":"Bearer " + login.token
+        },
+        data: gebruiker
+      }).then(function(p) {
+        var id = p.headers("location");
+        return id
+      }).catch(function(e) {
+        throw mylib.toMessage(e);
+      });
+  }
+
   service.sso = function(token) {
     return $http({
         method: "POST",

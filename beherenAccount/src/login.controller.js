@@ -37,7 +37,7 @@ function LoginController(GebruikerService,$state,$stateParams,$cookies,$rootScop
 
     function authenticeren(gebruiker)
     {
-      var hash = hash64(gebruiker.salt,$ctrl.wachtwoord);
+      var hash = mylib.hash64(gebruiker.salt,$ctrl.wachtwoord);
       var login = GebruikerService.authenticeren($ctrl.gebruikersnaam,hash);
       return login.then(function(l) {
         if (l.status === "OK") {
@@ -51,14 +51,4 @@ function LoginController(GebruikerService,$state,$stateParams,$cookies,$rootScop
   }
 }
 
-function hash64(salt64,cleartext) {
-
-  var wachtwoordBits = sjcl.codec.utf8String.toBits(cleartext);
-  var saltBits = sjcl.codec.base64.toBits(salt64);
-  return sjcl.codec.base64.fromBits(
-    sjcl.hash.sha256.hash(
-      sjcl.bitArray.concat(saltBits,wachtwoordBits)
-    )
-  )
-}
 })();

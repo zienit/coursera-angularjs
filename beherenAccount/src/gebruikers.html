@@ -1,10 +1,13 @@
-<h2>gebruikers</h2>
-<a href="#">Nieuwe gebruiker...</a>
-<div class="container">
-  <table class="table">
-    <tr ng-repeat="item in ctrl.gebruikers">
-      <td>{{ item.pki }}</td><td>{{ item.achternaam }}</td><td>{{ item.voornaam }}</td>
-      <!-- <button ng-click="ctrl.onRemove({index: $index});">Don't want this one</button> -->
-    </tr>
-  </table>
-</div>
+<h2>Gebruikers</h2>
+<a ui-sref="private.gebruiker">Nieuwe gebruiker...</a>
+<table class="table">
+  <tr>
+    <th class="col-md-2">PKI</th>
+    <th class="col-md-6">Achternaam</th>
+    <th class="col-md-4">Voornaam</th>
+  </tr>
+  <tr ng-repeat="item in ctrl.gebruikers">
+    <td>{{ item.pki }}</td><td>{{ item.achternaam }}</td><td>{{ item.voornaam }}</td>
+    <!-- <button ng-click="ctrl.onRemove({index: $index});">Don't want this one</button> -->
+  </tr>
+</table>

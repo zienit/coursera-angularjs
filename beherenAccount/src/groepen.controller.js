@@ -9,7 +9,6 @@ function GroepenController(groepen,$scope) {
 
   var $ctrl = this;
   $ctrl.groepen = groepen;
-  $scope.$emit("success",{ message: ""});
 
 }
 })();

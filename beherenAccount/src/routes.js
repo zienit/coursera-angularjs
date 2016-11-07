@@ -22,6 +22,7 @@ angular.module('BeherenAccountsApp')
           var login = GebruikerService.sso(sso);
           login.then(function(l) {
             if (l.status === "OK") {
+              $rootScope.$broadcast("login",l);
               $state.go(toState.name,toParams);
             } else {
               redirect();
@@ -55,7 +56,7 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: '/',
-      template: '<h2>Hello</h2><a ui-sref="login">login</a>'
+      template: '<div class="jumbotron"><h1>Hello, world!</h1><p>...</p><p><a class="btn btn-primary btn-lg" ui-sref="login" role="button">Learn more</a></p></div>'
     })
 
     .state('error', {
@@ -72,7 +73,7 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
 
     .state('logout',{
       url: '/logout',
-      template: "<h2>uitgelogd...</h2>",
+      template: "<h2>u bent uitgelogd.</h2>",
       controller: ['GebruikerService','$rootScope',function(GebruikerService,$rootScope) {
         GebruikerService.logout();
         $rootScope.$broadcast("login",null);
@@ -93,6 +94,17 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
           return GebruikerService.getGebruikers();
         }]
       }
+    })
+
+    .state('private.gebruiker', {
+      url: '/gebruikers/{gebruiker}',
+      templateUrl: 'src/gebruiker.html',
+      controller: 'GebruikerController as ctrl',
+      // resolve: {
+      //   gebruikers: ['GebruikerService', function (GebruikerService) {
+      //     return GebruikerService.getGebruikers();
+      //   }]
+      // }
     })
 
     .state('private.groepen', {

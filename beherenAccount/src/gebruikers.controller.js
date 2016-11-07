@@ -9,6 +9,5 @@ function GebruikersController(gebruikers,$scope) {
 
   var $ctrl = this;
   $ctrl.gebruikers = gebruikers;
-  $scope.$emit("success",{ message: ""});
 }
 })();

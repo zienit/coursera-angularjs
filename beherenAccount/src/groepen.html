@@ -1,9 +1,11 @@
-<h2>groepen</h2>
-<div class="container">
-  <table class="table">
-    <tr ng-repeat="item in ctrl.groepen">
-      <td><a ui-sref="private.gebruikersBijGroep({groep: item.id})">{{ item.code }}</a></td><td>{{ item.naam }}</td>
-      <!-- <button ng-click="ctrl.onRemove({index: $index});">Don't want this one</button> -->
-    </tr>
-  </table>
-</div>
+<h2>Groepen</h2>
+<table class="table">
+  <tr>
+    <th class="col-md-2">Code</th>
+    <th class="col-md-10">Naam</th>
+  </tr>
+  <tr ng-repeat="item in ctrl.groepen">
+    <td><a ui-sref="private.gebruikersBijGroep({groep: item.id})">{{ item.code }}</a></td><td>{{ item.naam }}</td>
+    <!-- <button ng-click="ctrl.onRemove({index: $index});">Don't want this one</button> -->
+  </tr>
+</table>
